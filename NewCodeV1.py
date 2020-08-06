@@ -137,7 +137,7 @@ def train(timestep, reward, state, log_prob, pred_value, pred_state, next_pred_v
 
     predictor_loss = lossfn(pred_state, state)
 
-    reward = -(torch.log(loss_D)).view(1,-1) + torch.tensor(reward).view(1,-1) + torch.log(predictor_loss).view(1,-1)
+    reward = -(torch.log(loss_D)).view(1,-1) + torch.tensor(reward).view(1,-1) - torch.log(predictor_loss).view(1,-1)
 
     advantage = reward + 0.99*next_pred_value - pred_value
 
